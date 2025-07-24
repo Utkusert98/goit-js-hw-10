@@ -1,37 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Promise Generator</title>
-    <link rel="stylesheet" href="./css/styles.css" />
-    <link rel="stylesheet" href="./css/snackbar.css" />
-  </head>
-  <body>
-    <a href="../index.html" class="go-home-link">Go to home</a>
-    <div class="form-wrapper">
-      <form class="form">
-        <label>
-          Delay (ms)
-          <input type="number" name="delay" required />
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Snackbar</title>
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
+
+<body>
+  <div class="container">
+    <a href="./index.html" class="back-link">Go back</a>
+    <h1 class="title-snack">Snackbar</h1>
+    <form class="form">
+      <label class="delay">
+        Delay (ms)
+        <input type="number" name="delay" class="delay-input" required />
+      </label>
+
+      <fieldset class="field-state">
+        <legend class="field-descr">State</legend>
+        <label class="field-check">
+          <input type="radio" name="state" value="fulfilled" required />
+          Fulfilled
         </label>
+        <label class="field-check">
+          <input type="radio" name="state" value="rejected" required />
+          Rejected
+        </label>
+      </fieldset>
 
-        <fieldset>
-          <legend>State</legend>
-          <label>
-            <input type="radio" name="state" value="fulfilled" required />
-            Fulfilled
-          </label>
-          <label>
-            <input type="radio" name="state" value="rejected" required />
-            Rejected
-          </label>
-        </fieldset>
+      <button type="submit" class="create-btn">Create notification</button>
+    </form>
+  </div>
 
-        <button type="submit">Create notification</button>
-      </form>
-    </div>
+  <script type="module" src="./js/2-snackbar.js"></script>
+</body>
 
-    <script type="module" src="./js/2-snackbar.js"></script>
-  </body>
 </html>

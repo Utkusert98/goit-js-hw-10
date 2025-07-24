@@ -1,216 +1,104 @@
-.timer-wrapper {
+body,
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex-grow: 1;
-    width: 100%;
-    max-width: 600px;
+    margin-top: 40px;
 }
 
-.input-button-container {
-    display: flex;
-    align-items: center;
-    margin-bottom: 30px;
-    gap: 16px;
-}
-
-input#datetime-picker {
-    width: 272px;
-    height: 40px;
-    padding: 8px 16px;
-    font-size: 16px;
-    line-height: 1.5;
-    border: 1px solid #808080;
-    border-radius: 4px;
-    background-color: #ffffff;
-    color: #2e2f42;
-    outline: none;
-    transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
-    box-sizing: border-box;
-}
-
-input#datetime-picker:hover {
-    border-color: #000000;
-}
-
-input#datetime-picker:focus {
-    border-color: #4E75FF;
-}
-
-input#datetime-picker:disabled {
-    background-color: #f8f8f8;
-    border: 1px dashed #808080;
-    color: #a0a0a0;
-    cursor: not-allowed;
-}
-
-button[data-start] {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px 16px;
-    min-width: 75px;
-    height: 40px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 16px;
-    font-weight: 500;
-    border: none;
+.back-link {
+    margin-bottom: 16px;
+    padding: 8px 20px;
     border-radius: 8px;
+    border: 1px solid #333;
+    background: #fff;
+    font-size: 18px;
     cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    box-sizing: border-box;
-    background-color: #4e75ff;
-    color: #ffffff;
+    text-decoration: none;
+    color: #222;
+    transition: background 0.2s;
 }
 
-button[data-start]:not(:disabled):hover {
-    background-color: #6c8cff;
+.back-link:hover {
+    background: #f0f0f0;
 }
 
-button[data-start]:disabled {
-    background-color: #cfcfcf;
-    color: #989898;
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    margin-top: 0;
+    text-align: center;
+}
+
+.timer-controls {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 32px;
+}
+
+#datetime-picker {
+    padding: 8px 12px;
+    font-size: 18px;
+    border-radius: 6px;
+    border: 1px solid #bbb;
+    width: 220px;
+}
+
+.start-btn {
+    padding: 8px 24px;
+    font-size: 18px;
+    border-radius: 6px;
+    border: none;
+    background: #ccc;
+    color: #666;
     cursor: not-allowed;
+    transition: background 0.2s;
+}
+
+.start-btn:enabled {
+    background: #222;
+    color: #fff;
+    cursor: pointer;
 }
 
 .timer {
     display: flex;
-    gap: 24px;
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 120%;
-    letter-spacing: 0.04em;
-    color: #2e2f42;
+    flex-direction: row;
+    justify-content: center;
+    gap: 48px;
+    margin-top: 24px;
 }
 
 .field {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    background-color: transparent;
-    padding: 0;
-    border: none;
-    box-shadow: none;
-    min-width: unset;
+    justify-content: center;
+    align-items: baseline;
+    font-size: 2.5rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin-bottom: 0;
 }
 
 .value {
-    font-size: 40px;
-    font-weight: 500;
-    line-height: 1.2;
-    color: #2e2f42;
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 0;
+    margin-right: 4px;
 }
 
 .label {
-    font-size: 16px;
-    font-weight: normal;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #222;
+    letter-spacing: 1px;
     text-transform: uppercase;
-    margin-top: 5px;
-    font-weight: 400;
-    line-height: 150%;
-    color: #2e2f42;
-}
-
-.flatpickr-calendar {
-    width: 280px;
-    border: 1px solid #c0c0c0;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    font-family: 'Montserrat', sans-serif;
-    color: #2e2f42;
-    box-sizing: border-box;
-}
-
-.flatpickr-current-month {
-    font-weight: 600;
-    font-size: 16px;
-    color: #2e2f42;
-}
-
-.flatpickr-prev-month,
-.flatpickr-next-month {
-    color: #2e2f42;
-    fill: #2e2f42;
-    opacity: 1;
-}
-
-.flatpickr-weekday {
-    color: #6a6a6a;
-    font-size: 14px;
-}
-
-.flatpickr-day {
-    color: #2e2f42;
-    padding: 0;
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-    border-radius: 50%;
-    margin: 2px;
-}
-
-.flatpickr-day.flatpickr-disabled,
-.flatpickr-day.prevMonthDay,
-.flatpickr-day.nextMonthDay {
-    color: #a0a0a0;
-}
-
-.flatpickr-day:hover:not(.flatpickr-disabled):not(.selected):not(.today) {
-    background-color: #f0f0f0;
-    color: #2e2f42;
-}
-
-.flatpickr-day.selected,
-.flatpickr-day.startRange,
-.flatpickr-day.endRange {
-    background-color: #4e75ff;
-    color: #ffffff;
-    border-color: #4e75ff;
-}
-
-.flatpickr-day.today:not(.selected) {
-    border: 1px solid #4e75ff;
-    background-color: transparent;
-    color: #2e2f42;
-}
-
-.flatpickr-time {
-    border-top: 1px solid #e0e0e0;
-    padding-top: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-}
-
-.flatpickr-time input {
-    font-size: 16px;
-    border: none;
-    outline: none;
-    text-align: center;
-    background: transparent;
-    width: 40px;
-    color: #2e2f42;
-}
-
-.flatpickr-am-pm {
-    font-size: 16px;
-    color: #2e2f42;
-}
-
-.notiflix-report {
-    border-bottom: 2px solid #ffbebe;
-    border-radius: 4px;
-    padding: 20px;
-    width: 302px;
-    height: 64px;
-    background-color: #ef4040;
-    color: #ffffff;
-    font-size: 16px;
-}
-
-.notiflix-report-button {
-    color: #ffffff;
-    border-radius: 4px;
+    margin-left: 0;
 }

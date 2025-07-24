@@ -1,177 +1,95 @@
-.form-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex-grow: 1;
-  margin-top: 0;
+.title-snack {
+    margin-top: 15px;
 }
 
 .form {
-  background-color: #fff;
-  padding: 24px; 
-  border-radius: 4px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px; 
-  width: 360px; 
+    width: 400px;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    margin: 15px auto;
 }
 
-.form label {
-  display: flex;
-  flex-direction: column;
-  font-size: 16px;
-  line-height: 24px;
-  color: #2e2f42;
+.delay {
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+    color: #2e2f42;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 8px;
+    margin-bottom: 16px;
 }
 
-.form input[type="number"] {
-  width: 100%; 
-  height: 40px; 
-  padding: 8px 16px; 
-  border: 1px solid #808080; 
-  border-radius: 4px;
-  font-size: 16px;
-  line-height: 24px;
-  margin-top: 8px; 
-  box-sizing: border-box; 
-  outline: none; 
-  transition: border-color 0.3s ease;
+.delay-input {
+    border: 1px solid #808080;
+    border-radius: 4px;
+    width: 360px;
+    height: 40px;
+    background-color: transparent;
+    padding-left: 15px;
+    transition: border-color 300ms ease;
 }
 
-.form input[type="number"]:hover {
-  border-color: #000; 
+.delay-input:hover {
+    border-color: #000;
 }
 
-.form input[type="number"]:focus {
-  border-color: #4e75ff; 
+.delay-input:focus {
+    border-color: #4e75ff;
 }
 
-.form fieldset {
-  border: 1px solid #808080; 
-  border-radius: 4px;
-  padding: 24px 16px; 
-  display: flex;
-  gap: 48px; 
-  margin: 0; 
+.field-state {
+    border-radius: 4px;
+    stroke-width: 1px;
+    stroke: #808080;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    padding-left: 48px;
+    padding-right: 48px;
+    margin-bottom: 24px;
+    transition: border-color 300ms ease;
 }
 
-.form fieldset legend {
-  font-size: 16px;
-  line-height: 150%;
-  color: #2e2f42;
-  padding: 0 8px; 
-  margin-left: -8px; 
-  letter-spacing: 0.04em;
+.field-state:hover {
+    border-color: #000;
 }
 
-.form fieldset label {
-  flex-direction: row;
-  align-items: center;
-  gap: 8px; 
-  margin-bottom: 0;
+.field-state>input:checked {
+    border-color: #000;
 }
 
-.form fieldset input[type="radio"] {
-  appearance: none; 
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  width: 20px; 
-  height: 20px;
-  border: 1px solid #808080; 
-  border-radius: 50%; 
-  display: inline-block;
-  position: relative;
-  cursor: pointer;
-  transition: border-color 0.3s ease;
+.field-descr {
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+    color: #2e2f42;
+    text-align: left;
+    margin-left: -30px;
 }
 
-.form fieldset input[type="radio"]:hover {
-  border-color: #000; 
+.field-check {
+    line-height: 1.5;
+    color: #2e2f42;
 }
 
-.form fieldset input[type="radio"]:checked {
-  border-color: #4e75ff; 
+.create-btn {
+    border-radius: 8px;
+    padding: 8px 16px;
+    width: 360px;
+    height: 40px;
+    border: none;
+    background-color: #4e75ff;
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+    color: #fff;
 }
 
-.form fieldset input[type="radio"]:checked::before {
-  content: '';
-  width: 12px; 
-  height: 12px;
-  background-color: #4e75ff;
-  border-radius: 50%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: block;
-}
-
-.form button[type="submit"] {
-  width: 100%; 
-  height: 40px; 
-  padding: 8px 16px; 
-  background-color: #4e75ff; 
-  color: white;
-  border: none;
-  border-radius: 8px; 
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 500; 
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.form button[type="submit"]:hover {
-  background-color: #6c8cff; 
-}
 
 .iziToast {
-  border-radius: 8px; 
-  padding: 8px 16px;
-  box-sizing: border-box;
-  width: 383px;
-  height: 64px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start; 
-  gap: 8px; 
-}
-
-.iziToast-body {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 16px;
-  line-height: 24px;
-  color: #fff; 
-}
-
-.iziToast-icon {
-  font-size: 24px; 
-  line-height: 1;
-}
-
-.iziToast.iziToast-success {
-  background-color: #59a10d; 
-}
-
-.iziToast.iziToast-error {
-  background-color: #ef4040; 
-}
-
-.iziToast.iziToast-warning { 
-  background-color: #ffa000; 
-}
-
-.iziToast.iziToast-info { 
-  background-color: #326cff !important; 
-}
-
-.iziToast-close {
-  color: #fff; 
-  opacity: 1;
-  font-size: 16px ; 
-  right: 16px; 
-  top: 50%;
-  transform: translateY(-50%);
+    font-size: 18px;
+    padding: 20px 30px;
+    min-width: 500px;
+    border-radius: 5px;
 }
