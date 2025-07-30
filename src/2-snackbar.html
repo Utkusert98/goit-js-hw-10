@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snackbar</title>
+    <link rel="stylesheet" href="./css/styles-form.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  </head>
+  <body>
+   
+    <main>
+      <div class="container">
+        <a class="back-link" href="./index.html">Go back</a>
+        <h1 class="main-title">Snackbar</h1>
+        
+      </div>
+
+      <form class="form">
+        <label class="text-delay">
+          Delay (ms)
+          <input class="input-delay" type="number" name="delay" required />
+        </label>
+      
+        <fieldset class="legend">
+          <legend class="state-legend">State</legend>
+
+          <div class="radio-group">
+          <label class="radio-text-fulfilled">
+            <input class="radio-input-fulfilled" type="radio" name="state" value="fulfilled" required />
+            Fulfilled
+          </label>
+          <label class="radio-text-rejected">
+            <input class="radio-input-rejected" type="radio" name="state" value="rejected" required />
+            Rejected
+          </label>
+
+        </div>
+        </fieldset>
+     
+
+        <button class="btn" type="submit">Create notification</button>
+      </form>
+
+    </main>
+
+    <script type="module" src="./js/2-snackbar.js"></script>
+  </body>
+</html>
