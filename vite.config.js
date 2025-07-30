@@ -1,4 +1,3 @@
-// vite.config.js
 import { defineConfig } from 'vite';
 import { glob } from 'glob';
 import injectHTML from 'vite-plugin-html-inject';
@@ -7,15 +6,12 @@ import SortCss from 'postcss-sort-media-queries';
 
 export default defineConfig(({ command }) => {
   return {
-    base: '/', // GitHub Pages root'tan çalışacak
-    define: {
-      [command === 'serve' ? 'global' : '_global']: {},
-    },
-    root: 'src',
+    base: '/',             // GitHub Pages kök dizinden yayına göre
+    root: 'src',           // Projenin kaynak klasörü src/
     build: {
-      sourcemap: true,
-      outDir: '../docs', // Çıkış klasörü artık docs/
+      outDir: '../docs',   // Build sonucu docs klasörüne
       emptyOutDir: true,
+      sourcemap: true,
       rollupOptions: {
         input: glob.sync('./src/*.html'),
         output: {
