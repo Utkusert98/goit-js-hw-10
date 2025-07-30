@@ -6,11 +6,11 @@ import SortCss from 'postcss-sort-media-queries';
 
 export default defineConfig(({ command }) => {
   return {
-    base: '/',             // GitHub Pages kök dizinden yayına göre
-    root: 'src',           // Projenin kaynak klasörü src/
+    base: '/',             
+    root: 'src',           
     build: {
-      outDir: '../docs',   // Build sonucu docs klasörüne
-      emptyOutDir: true,
+      outDir: '../',   
+      emptyOutDir: false,
       sourcemap: true,
       rollupOptions: {
         input: glob.sync('./src/*.html'),
