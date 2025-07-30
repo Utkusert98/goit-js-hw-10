@@ -7,49 +7,41 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v2.3.1
+        uses: actions/checkout@v2
         with:
-          # Tüm geçmişi getir, bu daha sonra force push için gerekebilir
           fetch-depth: 0
 
-      - name: Setup Node.js 🚀 # Node.js'in belirli bir sürümünü kurar
+      - name: Setup Node.js 🚀
         uses: actions/setup-node@v4
         with:
-          node-version: '20' # Vite projeniz için uygun Node.js sürümünü buraya yazın (örneğin '18', '20')
+          node-version: '20'
 
-      - name: Install and build 🔧
+      - name: Install dependencies and build 🔧
         run: |
           npm install
-          # Vite yürütülebilir dosyasına çalıştırma izni ver (önceki hatayı önlemek için)
-          chmod +x node_modules/.bin/vite || true
           npm run build
 
-      - name: Deploy to Main Branch Root 🚀 # Bu adım tamamen değiştirildi
+      - name: Copy build to root 🚚
         run: |
-          # Geçici bir dizin oluştur ve derlenmiş dosyaları buraya kopyala
-          mkdir deploy_temp
-          cp -r dist/* deploy_temp/
+          # Geçici klasör oluştur
+          mkdir temp_dist
+          cp -r dist/* temp_dist/
 
-          # Geçici dizine git
-          cd deploy_temp
+          # dist klasörünü ve içeriğini temizle
+          rm -rf dist
 
-          # Yeni bir Git deposu başlat
-          git init
+          # Build dosyalarını köke taşı
+          cp -rf temp_dist/* ./
+          rm -rf temp_dist
 
-          # Git kullanıcı bilgilerini yapılandır - BU SATIRLAR BURAYA TAŞINDI
+      - name: Commit and push built files 🧾
+        run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # Tüm dosyaları ekle ve commit et
           git add .
-          git commit -m "Deploy built files to main branch"
-
-          # Uzak depoyu (kendi deponuzu) ekle
-          # GITHUB_TOKEN, GitHub Actions tarafından otomatik olarak sağlanan bir belirteçtir
-          git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-
-          # main dalına zorla push et
-          # DİKKAT: Bu komut, main dalının mevcut içeriğini deploy_temp'in içeriğiyle tamamen değiştirecektir.
-          git push --force origin main
+          git commit -m "Build and deploy to root [auto]" || echo "No changes to commit"
+          git push origin main
