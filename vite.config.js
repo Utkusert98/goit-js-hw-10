@@ -7,13 +7,15 @@ import SortCss from 'postcss-sort-media-queries';
 
 export default defineConfig(({ command }) => {
   return {
-    base: '/goit-js-hw-10/',
+    base: '/', // GitHub Pages root'tan çalışacak
     define: {
       [command === 'serve' ? 'global' : '_global']: {},
     },
     root: 'src',
     build: {
       sourcemap: true,
+      outDir: '../docs', // Çıkış klasörü artık docs/
+      emptyOutDir: true,
       rollupOptions: {
         input: glob.sync('./src/*.html'),
         output: {
@@ -36,8 +38,6 @@ export default defineConfig(({ command }) => {
           },
         },
       },
-      outDir: '../dist',
-      emptyOutDir: true,
     },
     plugins: [
       injectHTML(),
