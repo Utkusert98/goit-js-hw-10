@@ -18,7 +18,6 @@ form.addEventListener('submit', event => {
     });
     return;
   }
-
   new Promise((resolve, reject) => {
     setTimeout(() => {
       selectedState === 'fulfilled' ? resolve(delay) : reject(delay);
