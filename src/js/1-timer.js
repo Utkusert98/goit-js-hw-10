@@ -11,7 +11,6 @@ const refs = {
   minutes: document.querySelector('[data-minutes]'),
   seconds: document.querySelector('[data-seconds]'),
 };
-
 let selectedTime = null;
 let intervalId = null;
 
