@@ -36,7 +36,6 @@ flatpickr('input#datetime-picker', {
     }
   },
 });
-
 startBtn.addEventListener('click', () => {
   if (!userSelectedDate) return;
 
