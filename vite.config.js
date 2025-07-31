@@ -1,14 +1,19 @@
 import { defineConfig } from 'vite';
+import { glob } from 'glob';
 import injectHTML from 'vite-plugin-html-inject';
 import FullReload from 'vite-plugin-full-reload';
 import SortCss from 'postcss-sort-media-queries';
 
 export default defineConfig(({ command }) => {
   return {
-    root: '.', // Proje kökü ana klasör (config ve index.html burada)
+    define: {
+      [command === 'serve' ? 'global' : '_global']: {},
+    },
+    root: 'src',
     build: {
+      sourcemap: true,
       rollupOptions: {
-        input: './index.html', // Ana giriş noktası root'ta index.html
+        input: glob.sync('./src/*.html'),
         output: {
           manualChunks(id) {
             if (id.includes('node_modules')) {
@@ -29,16 +34,12 @@ export default defineConfig(({ command }) => {
           },
         },
       },
-      outDir: 'dist', // Build sonrası dosyalar dist klasöründe olacak
+      outDir: '../dist',
       emptyOutDir: true,
-      sourcemap: true,
-    },
-    define: {
-      [command === 'serve' ? 'global' : '_global']: {},
     },
     plugins: [
       injectHTML(),
-      FullReload(['./**/*.html']),
+      FullReload(['./src/**/**.html']),
       SortCss({
         sort: 'mobile-first',
       }),
