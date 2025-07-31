@@ -1,89 +1,77 @@
-
-import flatpickr from 'flatpickr';
-
-import 'flatpickr/dist/flatpickr.min.css';
-
-import iziToast from 'izitoast';
-
-import 'izitoast/dist/css/iziToast.min.css';
-
+// DOM elemanlarını seçiyoruz
 const startBtn = document.querySelector('[data-start]');
-startBtn.disabled = true;
+const input = document.querySelector('#datetime-picker');
+const daysSpan = document.querySelector('[data-days]');
+const hoursSpan = document.querySelector('[data-hours]');
+const minutesSpan = document.querySelector('[data-minutes]');
+const secondsSpan = document.querySelector('[data-seconds]');
 
-let userSelectedDate = null;
 let countdownInterval = null;
+let selectedDate = null;
 
-flatpickr('input#datetime-picker', {
+// Flatpickr'ı başlatıyoruz (flatpickr global olarak CDN'den yüklendi)
+flatpickr(input, {
   enableTime: true,
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    const selectedDate = selectedDates[0];
-    console.log(selectedDate);
+    selectedDate = selectedDates[0];
     const now = new Date();
 
     if (selectedDate <= now) {
-      iziToast.error({
-        title: 'Error',
-        message: 'Please choose a date in the future',
-        position: 'topRight',
-      });
+      alert('Lütfen gelecekte bir tarih seçin.');
       startBtn.disabled = true;
-    } else {
-      userSelectedDate = selectedDate;
-      startBtn.disabled = false;
-    }
-  },
-});
-startBtn.addEventListener('click', () => {
-  if (!userSelectedDate) return;
-
-  startBtn.disabled = true;
-  document.querySelector('input#datetime-picker').disabled = true;
-
-  countdownInterval = setInterval(() => {
-    const now = new Date();
-    const timeRemaining = userSelectedDate - now;
-
-    if (timeRemaining <= 0) {
-      clearInterval(countdownInterval);
-      iziToast.success({
-        title: 'Done',
-        message: 'Countdown complete!',
-        position: 'topRight',
-      });
       return;
     }
 
-    const { days, hours, minutes, seconds } = convertMs(timeRemaining);
+    startBtn.disabled = false;
+  },
+});
 
-    document.querySelector('[data-days]').textContent = days;
-    document.querySelector('[data-hours]').textContent = hours;
-    document.querySelector('[data-minutes]').textContent = minutes;
-    document.querySelector('[data-seconds]').textContent = seconds;
+startBtn.addEventListener('click', () => {
+  if (!selectedDate) return;
+
+  startBtn.disabled = true;
+  input.disabled = true;
+
+  countdownInterval = setInterval(() => {
+    const now = new Date();
+    const timeLeft = selectedDate - now;
+
+    if (timeLeft <= 0) {
+      clearInterval(countdownInterval);
+      updateDisplay(0, 0, 0, 0);
+      alert('Geri sayım tamamlandı!');
+      return;
+    }
+
+    const { days, hours, minutes, seconds } = convertMs(timeLeft);
+    updateDisplay(days, hours, minutes, seconds);
   }, 1000);
 });
 
+function updateDisplay(days, hours, minutes, seconds) {
+  daysSpan.textContent = addLeadingZero(days);
+  hoursSpan.textContent = addLeadingZero(hours);
+  minutesSpan.textContent = addLeadingZero(minutes);
+  secondsSpan.textContent = addLeadingZero(seconds);
+}
+
+function addLeadingZero(value) {
+  return String(value).padStart(2, '0');
+}
+
 function convertMs(ms) {
-  // Number of milliseconds per unit of time
   const second = 1000;
   const minute = second * 60;
   const hour = minute * 60;
   const day = hour * 24;
 
-  // Remaining days
-  const days = Math.floor(ms / day);
-  // Remaining hours
-  const hours = Math.floor((ms % day) / hour);
-  // Remaining minutes
-  const minutes = Math.floor(((ms % day) % hour) / minute);
-  // Remaining seconds
-  const seconds = Math.floor((((ms % day) % hour) % minute) / second);
-
-  return { days, hours, minutes, seconds };
+  return {
+    days: Math.floor(ms / day),
+    hours: Math.floor((ms % day) / hour),
+    minutes: Math.floor(((ms % day) % hour) / minute),
+    seconds: Math.floor((((ms % day) % hour) % minute) / second),
+  };
 }
-
-console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
-console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
-console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
