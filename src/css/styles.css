@@ -2,9 +2,9 @@
 @import url('./base.css');
 @import url('./container.css');
 
-a[href='./index.html'],
-a[href='./1-timer.html'],
-a[href='./2-snackbar.html'] {
+a[href='../index.html'],
+a[href='../1-timer.html'],
+a[href='../2-snackbar.html'] {
   display: block;
 
   margin-bottom: 48px;
